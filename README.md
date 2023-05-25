@@ -1,5 +1,4 @@
 # WebSocketApp
+![Capture01](https://github.com/omidsotooni/WebSocket/assets/25717692/a874cff5-b13c-40e6-bc49-de8bc54fe72a)
 
-![Capture01](https://github.com/omidsotooni/WebSocket/assets/25717692/ce6a0cd2-d828-492e-b541-384b2cc61832)
-
-![Capture02](https://github.com/omidsotooni/WebSocket/assets/25717692/505324a0-553f-4cee-a760-7f977f61a0b1)
+![Capture02](https://github.com/omidsotooni/WebSocket/assets/25717692/b400bfff-9735-4760-ad3e-403096df6f5b)
