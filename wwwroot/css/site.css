@@ -1,0 +1,52 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+.show {
+    background-color: gainsboro;
+    height: 350px;
+    overflow-y: scroll;
+}
+
+.showPanel {
+    width: 400px;
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+}
+
+.open-button {
+    background-color: orangered;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    opacity: 0.8;
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 110px;
+}
+
+.chat-popup {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    right: 15px;
+    border: 3px solid #f1f1f1;
+    z-index: 9;
+}

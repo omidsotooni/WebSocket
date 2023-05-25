@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+    <button class="open-button" onclick="openForm()">Chat</button>
+
+    <div class="panel panel-primary showPanel chat-popup" id="myForm">
+        <div class="panel-heading">For send message should be connect!</div>
+        <div class="panel-body">
+            Your Name: <input type="text" id="txtUserName" />
+            <input type="button" value="Connect" onclick="connect();" id="btnConnect" class="btn btn-danger btn-sm" />
+            <br />
+            Reciver Name:<input type="text" id="txtReciver" />
+            <br />
+            Message:<input type="text" id="txtSend" required/>
+            <input type="button" value="Send" onclick="SendMsg();" class="btn btn-primary btn-sm" />
+            <input type="button" value="Close" onclick="CloseWS();" class="btn btn-warning btn-sm" />
+           @* <br/>
+            File:<input type="file" id="Fileuploder" />
+            <input type="button" value="SendFile" onclick="SendFile();" disabled/>*@
+            <div id="divshow" class="show">
+            </div>
+        </div>
+    </div>
+</div>

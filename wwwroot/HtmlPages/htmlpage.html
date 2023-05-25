@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link href="../lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <style>
+        .show{
+            background-color:gainsboro;
+            height:350px;
+            overflow-y:scroll;
+        }
+        .showPanel{
+            width:400px;
+            position:absolute;
+            bottom:5px;
+            right:10px;
+        }
+    </style>
+</head>
+<body id="htmlPage">
+
+    <div class="panel panel-primary showPanel">
+        <div class="panel-heading">سوال خود را از ما به پرسید</div>
+        <div class="panel-body">
+            Name:<input type="text" id="txtUserName" />
+            <input type="button" value="Connect" onclick="connect();" class="btn btn-danger" />
+            <hr />
+            Msg:<input type="text" id="txtMsg" />
+            <input type="button" value="Send" onclick="SendMsg();" class="btn btn-primary" />
+            <input type="button" value="Close" onclick="CloseWS();" class="btn btn-warning" />
+            <hr />
+            <div id="divshow" class="show"></div>
+
+        </div>
+    </div>      
+
+    <script>
+        var ws;
+
+        function connect() {
+            let txtUserName = document.getElementById("txtUserName");
+            var uri = "wss://localhost:44366/wschat?name=" + txtUserName.value;
+            ws = new WebSocket(uri);
+            console.log(ws);
+            console.log(ws.onopen);
+            ws.onopen = function () {
+                var divshow = document.getElementById("divshow");
+                divshow.innerHTML += "Connected";
+                alert("[open] You are Connected");
+            }
+
+            ws.onmessage = function (inData) {
+                var divshow = document.getElementById("divshow");
+                divshow.innerHTML += "<br/>" + inData.data;
+                divshow.scrollTo(0, divshow.scrollHeight);
+            }
+
+            ws.onerror = function (error) {
+                alert(`[error]`);
+            };
+        }
+        function SendFile() {
+            var file = document.getElementById("Fileuploder").files[0];
+            var FReader = new FileReader();
+            FReader.onload = function () {
+                ws.send(FReader.result);
+            }
+            if (file) {
+                FReader.readAsArrayBuffer(file);
+            }
+        }
+        function SendMsg() {
+            var txtMsg = document.getElementById("txtMsg");
+            ws.send(txtMsg.value);
+            txtMsg.value = "";
+        }
+
+        function CloseWS() {
+            ws.close(1000, "close web socket");
+            var divshow = document.getElementById("divshow");
+            alert(`[close] Your Connection closed . . .`);
+            divshow.innerHTML += "<br/>Disconnect";
+        }   
+
+    </script>
+</body>
+</html>
