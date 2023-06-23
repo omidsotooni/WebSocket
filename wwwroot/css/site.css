@@ -1,21 +1,22 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
 }
+
 .show {
     background-color: gainsboro;
     height: 350px;
@@ -23,14 +24,13 @@ body {
 }
 
 .showPanel {
-    width: 400px;
+    width: 350px;
     position: absolute;
     bottom: 5px;
     right: 10px;
 }
 
 .open-button {
-    background-color: orangered;
     color: white;
     padding: 16px 20px;
     border: none;
@@ -39,7 +39,7 @@ body {
     position: fixed;
     bottom: 80px;
     right: 20px;
-    width: 110px;
+    width: 90px;
 }
 
 .chat-popup {

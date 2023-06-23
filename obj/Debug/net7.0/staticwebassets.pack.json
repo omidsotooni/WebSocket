@@ -17,6 +17,10 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\User\\Documents\\Projects\\DotNet\\WebSocketApp\\wwwroot\\images\\Chat.png",
+      "PackagePath": "staticwebassets\\images\\Chat.png"
+    },
+    {
       "Id": "C:\\Users\\User\\Documents\\Projects\\DotNet\\WebSocketApp\\wwwroot\\images\\banner1.svg",
       "PackagePath": "staticwebassets\\images\\banner1.svg"
     },

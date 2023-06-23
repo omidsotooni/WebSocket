@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "mubiB/fO4wEvXy7Cz+ii0f8g9fCIqk1UPTVVI2HhFuo=",
+  "Hash": "UJdeXGFjcIsWFkbx5BOTkN/uom17SZf9k6BK2OKLsvU=",
   "Source": "WebSocketApp",
   "BasePath": "_content/WebSocketApp",
   "Mode": "Default",
@@ -168,6 +168,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\banner4.svg"
+    },
+    {
+      "Identity": "C:\\Users\\User\\Documents\\Projects\\DotNet\\WebSocketApp\\wwwroot\\images\\Chat.png",
+      "SourceId": "WebSocketApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\User\\Documents\\Projects\\DotNet\\WebSocketApp\\wwwroot\\",
+      "BasePath": "_content/WebSocketApp",
+      "RelativePath": "images/Chat.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\Chat.png"
     },
     {
       "Identity": "C:\\Users\\User\\Documents\\Projects\\DotNet\\WebSocketApp\\wwwroot\\js\\site.js",

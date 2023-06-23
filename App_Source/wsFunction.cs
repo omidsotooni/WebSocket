@@ -1,17 +1,38 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
+using StackExchange.Redis;
+using System.IdentityModel.Tokens.Jwt;
 using System.Net.WebSockets;
 using System.Text;
 
 namespace WebSocketApp.App_Source
 {
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class wsFunction
     {
+        private readonly IConnectionMultiplexer _redis;
+        public wsFunction(/*IConnectionMultiplexer redis*/)
+        {
+            //_redis = redis;
+        }
         public async Task ListenAcceptAsync(HttpContext context)
         {
             try
             {
                 WebSocket ws = await context.WebSockets.AcceptWebSocketAsync();
-                string Uname = context.Request.Query["name"];
+                // Authenticate the WebSocket connection in Query
+                var tokenQuery = context.Request.Query["token"].ToString();
+                // Authenticate the WebSocket connection in Headers
+                var tokenHeaders = context.Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
+
+                if (!ValidateToken(tokenQuery))
+                {
+                    await ws.CloseAsync(WebSocketCloseStatus.PolicyViolation, "Invalid token", CancellationToken.None);                    
+                    return;
+                }
+                string Uname = context.Request.Query["name"].ToString();
                 UserWebSocket uws = new UserWebSocket();
                 uws.UserName = Uname;
                 uws.UserWS = ws;
@@ -23,6 +44,7 @@ namespace WebSocketApp.App_Source
                 throw;
             }
         }
+        
         public async Task ReciveAsync(UserWebSocket uws)
         {
             try
@@ -81,7 +103,7 @@ namespace WebSocketApp.App_Source
                         }
                         if (result.MessageType == WebSocketMessageType.Close)
                         {
-                            // TODO
+                            await ws.CloseAsync(WebSocketCloseStatus.Empty, "Closed websocket", CancellationToken.None);
                             UserList.ListDic.Remove(UserName);
                             return;
                         }
@@ -90,6 +112,7 @@ namespace WebSocketApp.App_Source
             }
             catch (Exception)
             {
+                await uws.UserWS.CloseAsync(WebSocketCloseStatus.Empty, "Closed websocket", CancellationToken.None);
                 throw;
             }
         }
@@ -106,6 +129,34 @@ namespace WebSocketApp.App_Source
             byte[] buff = Encoding.UTF8.GetBytes(StrMsg);
             await webSocket.SendAsync(new ArraySegment<byte>
                 (array: buff, offset: 0, count: buff.Length), WebSocketMessageType.Text, true, CancellationToken.None);
+        }
+        
+        private bool ValidateToken(string token)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(wsConfig.SecretKey);
+
+            var tokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(key),
+                ValidateIssuer = true,
+                ValidIssuer = wsConfig.Issuer,
+                ValidateAudience = true,
+                ValidAudience = wsConfig.Audience,
+                ValidateLifetime = true,
+                ClockSkew = TimeSpan.Zero
+            };
+
+            try
+            {
+                tokenHandler.ValidateToken(token, tokenValidationParameters, out _);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
     }

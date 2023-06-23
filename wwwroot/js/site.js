@@ -1,12 +1,9 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
-
-// Write your JavaScript code.
-var ws;
+﻿var ws;
+const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJKV1QgV2ViU29ja2V0IiwiaWF0IjoxNjg3NTEzMTUxLCJleHAiOjE3MTkwNDkxNTEsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjcyMTkiLCJzdWIiOiJvbWlkQGV4YW1wbGUuY29tIiwiUm9sZSI6WyJNYW5hZ2VyIiwiUHJvamVjdCBBZG1pbmlzdHJhdG9yIl19.lXTaEQUJOCAsK0iVqpR1ds5emmoPr26ljdAUhEcNf4w";
 
 function connect() {
     let txtUserName = document.getElementById("txtUserName");
-    var uri = "wss://localhost:44366/wschat?name=" + txtUserName.value;
+    var uri = "wss://localhost:44366/wschat?name=" + txtUserName.value + "&token=" + token;
     ws = new WebSocket(uri);
 
     ws.onopen = function () {
@@ -25,6 +22,7 @@ function connect() {
         alert(`[error]`);
     };
 }
+
 function SendFile() {
     var file = document.getElementById("Fileuploder").files[0];
     var FReader = new FileReader();
@@ -35,10 +33,16 @@ function SendFile() {
         FReader.readAsArrayBuffer(file);
     }
 }
+
 function SendMsg() {
     var txtSend = document.getElementById("txtSend");
     var txtReciver = document.getElementById("txtReciver");
-    ws.send(JSON.stringify({ Reciver: txtReciver.value, Message: txtSend.value }));
+
+    ws.send(JSON.stringify(
+        {
+            Reciver: txtReciver.value,
+            Message: txtSend.value           
+        }));
     txtSend.value = "";
 }
 

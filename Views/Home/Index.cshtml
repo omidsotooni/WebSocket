@@ -1,25 +1,78 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    var nowDate = DateTime.Now;
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 
-    <button class="open-button" onclick="openForm()">Chat</button>
+
+    <div class="card text-center">
+        <div class="card-header">
+            <h1 class="display-4">Welcome</h1>
+        </div>
+        <div class="card-body row">
+            <h5 class="card-title"><p>WebSocket online chat and read data with ASP.NET Core</p></h5>
+            <div class="col-md-9">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Base Currency</th>
+                            <th scope="col">Quote Currency</th>
+                            <th scope="col">Date Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>BTC</td>
+                            <td>USD</td>
+                            <td>@nowDate</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>ETH</td>
+                            <td>USD</td>
+                            <td>@nowDate</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>LTC</td>
+                            <td>USD</td>
+                            <td>@nowDate</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-3">
+                
+            </div>
+        </div>
+        <div class="card-footer text-muted">
+            Last updated: a few seconds ago . . .
+        </div>
+    </div>
+
+    <img class="open-button" src="~/images/Chat.png" onclick="openForm()" />
 
     <div class="panel panel-primary showPanel chat-popup" id="myForm">
-        <div class="panel-heading">For send message should be connect!</div>
+        <div class="panel-heading" style="color:white; background-color:#ff0606">For send message have to connect!</div>
         <div class="panel-body">
-            Your Name: <input type="text" id="txtUserName" />
-            <input type="button" value="Connect" onclick="connect();" id="btnConnect" class="btn btn-danger btn-sm" />
-            <br />
-            Reciver Name:<input type="text" id="txtReciver" />
-            <br />
-            Message:<input type="text" id="txtSend" required/>
-            <input type="button" value="Send" onclick="SendMsg();" class="btn btn-primary btn-sm" />
-            <input type="button" value="Close" onclick="CloseWS();" class="btn btn-warning btn-sm" />
-           @* <br/>
+
+            <div class="form-control-sm">
+                <label>Your Name:</label>
+                <input type="text" id="txtUserName" class="small" />
+                <input type="button" value="Connect" onclick="connect();" id="btnConnect" class="btn btn-success btn-sm" />
+                <br />
+                <label>Reciver Name:</label>
+                <input type="text" id="txtReciver" class="small" />
+                <br />
+                Message:<input type="text" id="txtSend" required class="small" />
+                <input type="button" value="Send" onclick="SendMsg();" class="btn btn-primary btn-sm" />
+                <input type="button" value="Close" onclick="CloseWS();" class="btn btn-danger btn-sm" />
+            </div>
+
+            @* <br/>
             File:<input type="file" id="Fileuploder" />
             <input type="button" value="SendFile" onclick="SendFile();" disabled/>*@
             <div id="divshow" class="show">
