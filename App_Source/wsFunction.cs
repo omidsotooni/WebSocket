@@ -13,10 +13,10 @@ namespace WebSocketApp.App_Source
     public class wsFunction
     {
         private readonly IConnectionMultiplexer _redis;
-        public wsFunction(/*IConnectionMultiplexer redis*/)
-        {
-            //_redis = redis;
-        }
+        //public wsFunction(/*IConnectionMultiplexer redis*/)
+        //{
+        //    //_redis = redis;
+        //}
         public async Task ListenAcceptAsync(HttpContext context)
         {
             try
